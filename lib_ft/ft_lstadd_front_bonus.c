@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini.h                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 19:36:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/03/04 14:08:13 by khhihi           ###   ########.fr       */
+/*   Created: 2024/10/28 10:51:30 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/07 12:11:35 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_H
-# define MINI_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <signal.h>
-# include <stdio.h>
-# include <unistd.h>
-
-#endif
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}

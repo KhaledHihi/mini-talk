@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini.h                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 19:36:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/03/04 14:08:13 by khhihi           ###   ########.fr       */
+/*   Created: 2024/10/22 13:59:40 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/08 16:33:00 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_H
-# define MINI_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <signal.h>
-# include <stdio.h>
-# include <unistd.h>
-
-#endif
+char	*ft_strchr(const char *s, int c)
+{
+	while ((char)c != *s)
+	{
+		if (!*s)
+		{
+			return (0);
+		}
+		s++;
+	}
+	return ((char *)s);
+}

@@ -24,6 +24,8 @@ client:		client.o
 		@make -C libft
 		$(CC) $(CFLAGS) $? -Llibft -lft  -o client
 
+bonus : all
+
 $(Libft_DIR) :
 	@$(MAKE) -C libft
 

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:44:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/03/05 17:24:54 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:54:50 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int g_confirmation = 0;
+int		g_confirmation = 0;
 
 void	ft_handler(int signum)
 {
@@ -58,7 +58,7 @@ void	send_message(int pid, char *msg)
 	i = 0;
 	while (msg[i])
 		send_bits(pid, msg[i++]);
-	send_bits(pid, '\0'); // Send null-terminator to signal end of message
+	send_bits(pid, '\0');
 }
 
 int	main(int ac, char *av[])
@@ -66,19 +66,18 @@ int	main(int ac, char *av[])
 	int	pid;
 
 	if (ac != 3)
-		return (ft_putendl_fd("Error: wrong format.\nTry: ./client <PID> <MESSAGE>", 1), 1);
+	{
+		ft_putendl_fd("Error: wrong format.\nTry: ./client <PID> <MESSAGE>", 1);
+		return (1);
+	}
 	pid = ft_atoi(av[1]);
 	if (pid <= 0)
 		return (ft_putendl_fd("Invalid PID.", 1), 1);
 	if (ft_strlen(av[2]) == 0)
 		return (ft_putendl_fd("Error: Write a message", 1), 1);
-
-	// Setup signal handlers before sending the message
 	signal(SIGUSR1, ft_handler);
 	signal(SIGUSR2, ft_handler);
-
 	send_message(pid, av[2]);
-
-	while (1) // Keep the client alive until confirmation is received
+	while (1)
 		usleep(100);
 }
