@@ -6,7 +6,7 @@ OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-Libft_DIR = libft/libft.a
+Libft_DIR = lib_ft/libft.a
 
 Header = mini.h
 
@@ -17,27 +17,27 @@ all : $(Libft_DIR) $(NAME) $(Header)
 $(NAME):	 server client
 
 server:		server.o
-		@make -C libft
-		$(CC) $(CFLAGS) $? -Llibft -lft  -o server
+		@make -C lib_ft
+		$(CC) $(CFLAGS) $? -Llib_ft -lft  -o server
 
 client:		client.o
-		@make -C libft
-		$(CC) $(CFLAGS) $? -Llibft -lft  -o client
+		@make -C lib_ft
+		$(CC) $(CFLAGS) $? -Llib_ft -lft  -o client
 
 bonus : all
 
 $(Libft_DIR) :
-	@$(MAKE) -C libft
+	@$(MAKE) -C lib_ft
 
 re : fclean all
 
 clean:
 	@$(RM) $(OBJ)
-	@$(MAKE) -C libft clean
+	@$(MAKE) -C lib_ft clean
 
 fclean: clean
 	@$(RM) server client
-	@$(MAKE) -C libft fclean
+	@$(MAKE) -C lib_ft fclean
 
 .PHONY: all clean fclean re
 .SECONDARY : $(OBJ)

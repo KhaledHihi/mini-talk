@@ -6,17 +6,15 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:44:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/03/06 16:51:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/03/08 21:07:00 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-#include <signal.h>
-#include <unistd.h>
 
 void	ft_handler(int signum, siginfo_t *info, void *context)
 {
-	static char	byte = 0;
+	static int	byte = 0;
 	static int	bit = 0;
 
 	(void)context;
@@ -58,5 +56,5 @@ int	main(int ac, char **av)
 	sig_setup(SIGUSR1, ft_handler);
 	sig_setup(SIGUSR2, ft_handler);
 	while (1)
-		usleep(50);
+		pause();
 }
