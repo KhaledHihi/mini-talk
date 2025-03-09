@@ -6,11 +6,23 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:44:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/03/08 21:07:00 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/03/09 19:35:04 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+int		g_lastclient;
+
+void	ft_check_client(int *bit, int *byte, siginfo_t *info)
+{
+	if (g_lastclient != info->si_pid)
+	{
+		*bit = 0;
+		*byte = 0;
+		g_lastclient = info->si_pid;
+	}
+}
 
 void	ft_handler(int signum, siginfo_t *info, void *context)
 {
@@ -18,6 +30,7 @@ void	ft_handler(int signum, siginfo_t *info, void *context)
 	static int	bit = 0;
 
 	(void)context;
+	ft_check_client(&bit, &byte, info);
 	if (signum == SIGUSR1)
 		byte |= (1 << (7 - bit));
 	bit++;
@@ -48,6 +61,7 @@ void	sig_setup(int sig, void (*handler1)(int, siginfo_t *, void *))
 
 int	main(int ac, char **av)
 {
+	(void)av;
 	if (ac != 1)
 		return (ft_putstr_fd("Invalid arguments\nTry: ./server", 1), 1);
 	ft_putstr_fd("The PID of this server is: ", 1);

@@ -4,7 +4,7 @@ SRC = server.c client.c
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 Libft_DIR = lib_ft/libft.a
 
@@ -23,6 +23,9 @@ server:		server.o
 client:		client.o
 		@make -C lib_ft
 		$(CC) $(CFLAGS) $? -Llib_ft -lft  -o client
+
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus : all
 
